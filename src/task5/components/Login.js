@@ -23,22 +23,19 @@ function Login() {
             const userData = JSON.parse(getHodData) || []
             const userStaffData = JSON.parse(getStaffData) || []
 
-            const userLogin = userData.map((ele, i) => {
+            const userLogin = userData.filter((ele, i) => {
                 if (ele.username === username && ele.password === password) {
-                    localStorage.setItem("signin", JSON.stringify(ele))
-                }
-                if (getSignin?.role === "Hod") {
                     navigate("/dashboard/Hod")
-                }
-            })
-
-            const userStaffLogin = userStaffData.map((ele, i) => {
-                if (ele.username === username && ele.password === password) {
                     localStorage.setItem("signin", JSON.stringify(ele))
                 }
-                if (getSignin?.role === "Staff") {
+                return ele.username === username && ele.password === password
+            })
+            const userStaffLogin = userStaffData.filter((ele, i) => {
+                if (ele.username === username && ele.password === password) {
                     navigate("/dashboard/Staff")
+                    localStorage.setItem("signin", JSON.stringify(ele))
                 }
+                return ele.username === username && ele.password === password
             })
             if (userLogin.length == 0 && userStaffLogin.length == 0) {
                 alert("Invalid Username or Password")
@@ -53,22 +50,22 @@ function Login() {
 
     return (
         <>
-             <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <Box
-                    borderRadius={"25px"}
-                    border={"0.25px solid #ccc"}
-                    padding={"70px"}
+                    borderRadius={"30px"}
+                    border={"0.30px solid #ccc"}
+                    padding={"75px"}
                     display={"flex"}
                     flexDirection={"column"}
                     maxWidth={"400px"}
                     margin={"100px auto"}
-                    boxShadow={"5px 5px 10px black"}
+                    boxShadow={"5px 5px 15px"}
                 >
-                    <Typography  textAlign={"center"} variant='h4'> Login</Typography>
-                    <TextField onChange={handleChange} name="username" value={data.username}  margin='normal' placeholder='Enter Username' type="text" />
+                    <Typography textAlign={"center"} variant='h3'> Login</Typography>
+                    <TextField onChange={handleChange} name="username" value={data.username} margin='normal' placeholder='Enter Username' type="text" />
                     <TextField onChange={handleChange} name="password" value={data.password} margin='normal' placeholder='Enter Password' type="password" />
-                    <Button sx={{ mt: 2 }} type='submit' color='primary' variant='contained'>Login</Button>
-                    <p className='mt-3'>Not Registered Yet? <NavLink to={"/register"}>Register</NavLink></p>
+                    <Button sx={{ mt: 2 }} type='submit' color='warning' variant='contained'>Login</Button>
+                    <p className='mt-3'>Not Registered Yet? <NavLink style={{ textDecoration: "none" }} to={"/register"}>Register</NavLink></p>
                 </Box>
             </form>
         </>

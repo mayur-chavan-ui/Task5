@@ -101,8 +101,8 @@ function StaffForm() {
                     
                     <div className='mt-4'>
                         <div style={{ width: "50%", marginLeft: "20%" }}>
-                            <button className='btn btn-primary' type='submit' style={{ width: "100%" }}>Register</button>
-                            <p className='mt-3'>Already Registered <NavLink to={"/login"}>Login</NavLink></p>
+                            <button className='btn btn-warning' type='submit' style={{ width: "100%" }}>Register</button>
+                            <p className='mt-3'>Already Registered <NavLink style={{ textDecoration: "none" }} to={"/login"}>Login</NavLink></p>
                         </div>
                     </div>
                 </form>

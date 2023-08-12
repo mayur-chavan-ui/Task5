@@ -6,6 +6,8 @@ import { Button } from '@mui/material';
 
 function StaffDashboard() {
 
+  const getSignin = JSON.parse(localStorage.getItem("signin"))
+
   const [modal, setModal] = useState(false)
   const [data, setData] = useState(() => JSON.parse(localStorage.getItem("leaveData")) || [])
   const [leaveData, setLeaveData] = useState({
@@ -14,6 +16,10 @@ function StaffDashboard() {
     reason: "",
     status: "Pending"
   })
+
+  if (getSignin) {
+    leaveData.name = `${getSignin.fname} ${getSignin.lname}`
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -29,6 +35,7 @@ function StaffDashboard() {
     const dDiff = tdiff / (1000 * 3600 * 24)
     leaveData.days = dDiff
   }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setData((pre) => [...pre, leaveData])
@@ -52,7 +59,7 @@ function StaffDashboard() {
   return (
     <>
       <div className='col-sm-4' >
-        <Modal size='md' isOpen={modal} style={{ marginTop: "100px" }}>
+        <Modal size='md' isOpen={modal} style={{ marginTop: "200px" }}>
           <ModalHeader toggle={() => setModal(!modal)}>
             <h2 style={{ marginLeft: "100px" }}>APPLY FOR LEAVE</h2>
           </ModalHeader>
@@ -98,7 +105,7 @@ function StaffDashboard() {
       <div className='d-flex container' >
         {data?.map((info) => {
           return <div className="card col-sm-3 m-2" >
-            <div className="card-body" style={{ boxShadow: "2px 6px 8px purple" }}>
+            <div className="card-body" style={{ boxShadow: "2px 6px 8px" }}>
               <p><strong>Leave From </strong></p>
               <p> {info.fromDate} to {info.toDate}</p>
               <p><strong>Number Of Days</strong> :{info.days}</p>

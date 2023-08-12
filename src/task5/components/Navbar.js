@@ -2,7 +2,6 @@ import React from 'react'
 import { AppBar, Button, Toolbar } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-
 function Navbar() {
 
   const navigate = useNavigate()
@@ -14,12 +13,12 @@ function Navbar() {
 
   return (
     <>
-      <AppBar sx={{ backgroundColor: "lightcyan" }}>
+      <AppBar sx={{ backgroundColor: "black" }}>
         <Toolbar>
-          <Button onClick={() => navigate("/")}>Home</Button>
+          <Button sx={{ color: "white" }} onClick={() => navigate("/")}>Home</Button>
           <div style={{ marginLeft: "auto" }}>
             <Button variant="contained" onClick={() => navigate("login")}>Login</Button>
-            <Button variant="contained" style={{marginLeft:"15px"}} onClick={handleLogout}>Logout</Button>
+            <Button variant="contained" style={{ marginLeft: "10px" }} onClick={handleLogout}>Logout</Button>
           </div>
         </Toolbar>
       </AppBar>
